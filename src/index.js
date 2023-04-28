@@ -8,6 +8,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 const searchFormEl = document.querySelector('#search-form');
 const galleryEl = document.querySelector('.gallery');
 const btnEl = document.querySelector('.load-more');
+btnEl.style.display = "none";
 
 let inpValue = '';
 let gallery = new SimpleLightbox('.gallery a', {
@@ -30,8 +31,6 @@ function searchForm(evt) {
     // console.log(inpValue);
     getSearch(inpValue).then(data => {     
         if (data.hits.length === 0) {
-            // countryEl.innerHTML = '';
-            // listEl.innerHTML = '';
             Notiflix.Notify.info("Sorry, there are no images matching your search query. Please try again.");
             return;
         }
@@ -58,21 +57,13 @@ function searchForm(evt) {
         galleryEl.style.display = "flex";
         galleryEl.style.flexWrap = "wrap";
         galleryEl.insertAdjacentHTML('beforeend', markupcard);
-        // gallery.refresh();
-        // galleryEl.innerHTML = markupcard;
-
-        // listEl.style.listStyle = "none";
-        // listEl.style.fontSize = "25px";
-        // listEl.style.alignItems = "center";
-        
-
+        btnEl.style.display = "flex";
+        gallery.refresh();
 } )
     .catch (err => {
         if(err.message === '404') {        
         Notiflix.Notify.failure("Oops....");
             searchFormEl.innerHTML = '';
-            // listEl.innerHTML = '';
-            // inputEl.value = '';
         }
         console.log(err);
     });
@@ -80,7 +71,7 @@ function searchForm(evt) {
 
 const BASE_URL = "https://pixabay.com/api/";
 const API_KEY = "35792942-c738c06de8752e63923c1b94a";
-// const URL = `${BASE_URL}?key=${API_KEY}&q=${inpValue}&page=${page}$per_page=40`;
+
 function getSearch() {          
     return fetch(`${BASE_URL}?key=${API_KEY}&q=${inpValue}&page=1&per_page=40&image_type=photo&orientation=horizontal&safesearch=true`).then((resp) => {
         if (!resp.ok) {
@@ -89,26 +80,10 @@ function getSearch() {
         return resp.json();
     });  
 }
-//  getSearch().then(data => console.log(data)).catch(err => console.log(err))
 
-
-   //  const params = new URLSearchParams({
-    //     // limit: 40,
-    //      page: 1,
-    //      per_page: 40,
-        
-//         // key: API_KEY,
-//         // q: cat,
-//         // image_type: photo,
-//         // orientation: horizontal,
-//         // safesearch: true
-    //  });
-    //      const option = {
-    //          method: 'GET',
-    //          headers: {
-    //              Authorization: `Bearer ${API_KEY}`
-    //          }
-    //      }
-    // fetch(`${BASE_URL}${API_KEY}${params}`).then(resp => console.log(resp))
-//  }
-//  getSearch();
+btnEl.addEventListener('click', btnLoad);
+function btnLoad(page) {
+    const URL = (`${BASE_URL}?key=${API_KEY}&q=${inpValue}&page=1&per_page=40&image_type=photo&orientation=horizontal&safesearch=true`);
+    page += 1;
+    return;
+}
