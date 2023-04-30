@@ -41,16 +41,16 @@ function searchForm(evt) {
             <a class="gallery__link" href="${el.largeImageURL}"><img src="${el.webformatURL}" alt="${el.tags}" width="250" height="200" loading="lazy" /></a>
             <div class="info">
                 <p class="info-item">
-                <b>Likes${el.likes}</b>
+                <b>Likes<br>${el.likes}</b>
                 </p>
                 <p class="info-item">
-                <b>Views${el.views}</b>
+                <b>Views<br>${el.views}</b>
                 </p>
                 <p class="info-item">
-                <b>Comments${el.comments}</b>
+                <b>Comments<br>${el.comments}</b>
                 </p>
                 <p class="info-item">
-                <b>Downloads${el.downloads}</b>
+                <b>Downloads<br>${el.downloads}</b>
                 </p>
             </div>
         </div>`).join("");

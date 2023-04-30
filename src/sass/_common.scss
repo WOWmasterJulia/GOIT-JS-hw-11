@@ -51,7 +51,7 @@ body {
     cursor: zoom-in;
 }
 .info {
-    padding-left: 15px;
+    padding-left: 12px;
     
 }
 .info-item {
@@ -77,4 +77,9 @@ body {
     margin-bottom: 20px;   
     display: block;
     margin: 0 auto;
+}
+
+.info {
+  display: flex;
+grid-gap: 12px;
 }
